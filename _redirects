@@ -1,16 +1,9 @@
-# ---- BoldTrail core ----
-/index.php*     https://www.duikerproperties.com/index.php:splat     200
+# --- Redirect BoldTrail pages to www ---
+/index.php*   https://www.duikerproperties.com/index.php:splat   301
+/listings*    https://www.duikerproperties.com/listings:splat    301
+/search*      https://www.duikerproperties.com/search:splat      301
+/contact*     https://www.duikerproperties.com/contact:splat     301
+/sold*        https://www.duikerproperties.com/sold:splat        301
 
-# ---- BoldTrail assets ----
-/css/*          https://www.duikerproperties.com/css/:splat          200
-/js/*           https://www.duikerproperties.com/js/:splat           200
-/images/*       https://www.duikerproperties.com/images/:splat       200
-/img/*          https://www.duikerproperties.com/img/:splat          200
-/assets/*       https://www.duikerproperties.com/assets/:splat       200
-/uploads/*      https://www.duikerproperties.com/uploads/:splat      200
-/includes/*     https://www.duikerproperties.com/includes/:splat     200
-/vendor/*       https://www.duikerproperties.com/vendor/:splat       200
-/fonts/*        https://www.duikerproperties.com/fonts/:splat        200
-
-# ---- Everything else = Netlify homepage ----
-/*              /index.html                                          200
+# --- Everything else stays on Netlify ---
+/*            /index.html                                        200
