@@ -1,12 +1,1153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Duiker Properties</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duiker Properties | Calgary Real Estate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent-color: #FF6633;
+            --dark-gray: #333;
+            --light-gray: #666;
+            --bg-light: #f9f9f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: var(--dark-gray);
+        }
+
+        .logo span {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--dark-gray);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            margin-top: 70px;
+        }
+
+        .hero-title {
+            font-family: 'Georgia', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            line-height: 1.2;
+        }
+
+        .hero-title .accent {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .search-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+        }
+
+        .search-bar:active {
+            transform: translateY(0);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .search-text {
+            flex: 1;
+            font-size: 1rem;
+            color: #999;
+            text-align: left;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .search-btn {
+            background: var(--accent-color);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+
+        .search-bar:hover .search-btn {
+            transform: scale(1.05);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .stats-header {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-subheader {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            margin-bottom: 4rem;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-family: 'Georgia', serif;
+            font-size: 4rem;
+            color: var(--accent-color);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .about-content .accent {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .about-subtitle {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--light-gray);
+        }
+
+        .about-text {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff5522;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 102, 51, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Properties Section */
+        .properties-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .accent {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .properties-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .property-image {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.1);
+        }
+
+        .mls-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .property-details {
+            padding: 1.5rem;
+        }
+
+        .property-price {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-specs {
+            display: flex;
+            gap: 1rem;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-address {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .property-mls {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Luxury Section */
+        .luxury-section {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .luxury-title {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .luxury-title .accent {
+            font-style: italic;
+        }
+
+        /* Communities Section */
+        .communities-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .communities-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .communities-content h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .communities-content .accent {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .communities-text {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .communities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .community-card {
+            position: relative;
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .community-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .community-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .community-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 3rem 2rem 2rem;
+            color: white;
+        }
+
+        .community-name {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+
+        /* Property Types Grid */
+        .property-types {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .type-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .type-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .type-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .type-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+
+        .type-name {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .news-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 2rem;
+        }
+
+        .news-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .news-date {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contact CTA Section */
+        .contact-cta {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .contact-title {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .contact-title .accent {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .contact-text {
+            max-width: 700px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #999;
+        }
+
+        .view-more-btn {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-container,
+            .communities-container {
+                grid-template-columns: 1fr;
+            }
+
+            .property-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .search-bar {
+                max-width: 90%;
+            }
+
+            .search-text {
+                font-size: 0.9rem;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            .about-content h2,
+            .communities-content h2 {
+                font-size: 2rem;
+            }
+
+            .luxury-title,
+            .contact-title {
+                font-size: 2.5rem;
+            }
+
+            .property-types {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Duiker Properties</h1>
-  <p>New homepage coming soon.</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="#" class="logo">
+                    DUIKER
+                    <span>PROPERTIES</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#buy">BUY</a></li>
+                    <li><a href="#sell">SELL</a></li>
+                    <li><a href="#communities">COMMUNITIES</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#search">SEARCH</a></li>
+                    <li><a href="#luxury">LUXURY</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">
+            WE HELP <span class="accent">EVERYONE</span><br>
+            FIND THEIR HAPPY
+        </h1>
+        <button class="search-bar" id="searchBarButton">
+            <span class="search-text">Start your search here.</span>
+            <div class="search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+            </div>
+        </button>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <h2 class="stats-header">Proven success. Calgary reach. <span class="accent" style="font-style: italic;">Trusted expertise.</span></h2>
+        <p class="stats-subheader">Rooted locally, chosen globally.</p>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">$250M+</div>
+                <div class="stat-label">Total Sales in Calgary</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Annual Transactions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$350M</div>
+                <div class="stat-label">In Regional Sales</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>We Are<br><span class="accent">Duiker Properties</span></h2>
+                <p class="about-subtitle">Top Calgary Real Estate Experts</p>
+                <p class="about-text">
+                    Founded with a commitment to excellence, Duiker Properties is the industry leader in Southeast Calgary real estate, 
+                    specializing in communities like Mahogany, Seton, Auburn Bay, Cranston, and Chestermere. With Royal LePage Solutions, 
+                    we provide exceptional service backed by cutting-edge technology and deep local market expertise.
+                </p>
+                <div class="about-buttons">
+                    <a href="#" class="btn-primary">ABOUT US</a>
+                    <a href="#" class="btn-secondary">CALGARY HOMES FOR SALE</a>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" alt="Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="properties-section" id="buy">
+        <div class="section-header">
+            <h2>Calgary Real Estate - Featured <span class="accent">Properties</span></h2>
+        </div>
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600" alt="Property">
+                    <div class="mls-badge">MLS #: 12345678</div>
+                </div>
+                <div class="property-details">
+                    <div class="property-price">$1,299,000</div>
+                    <div class="property-specs">
+                        <span>4 bd</span>
+                        <span>3 ba</span>
+                        <span>2,850 Sq.Ft.</span>
+                        <span>For Sale</span>
+                    </div>
+                    <div class="property-address">123 Mahogany Drive SE, Calgary, AB T3M 2X9</div>
+                    <div class="property-mls">MLS®: 12345678</div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600" alt="Property">
+                    <div class="mls-badge">MLS #: 87654321</div>
+                </div>
+                <div class="property-details">
+                    <div class="property-price">$899,900</div>
+                    <div class="property-specs">
+                        <span>3 bd</span>
+                        <span>2 ba</span>
+                        <span>2,100 Sq.Ft.</span>
+                        <span>For Sale</span>
+                    </div>
+                    <div class="property-address">456 Seton Boulevard SE, Calgary, AB T3M 1A1</div>
+                    <div class="property-mls">MLS®: 87654321</div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600" alt="Property">
+                    <div class="mls-badge">MLS #: 11223344</div>
+                </div>
+                <div class="property-details">
+                    <div class="property-price">$749,000</div>
+                    <div class="property-specs">
+                        <span>3 bd</span>
+                        <span>2 ba</span>
+                        <span>1,850 Sq.Ft.</span>
+                        <span>For Sale</span>
+                    </div>
+                    <div class="property-address">789 Auburn Bay Avenue SE, Calgary, AB T3M 0P4</div>
+                    <div class="property-mls">MLS®: 11223344</div>
+                </div>
+            </div>
+        </div>
+        <div class="view-more-btn">
+            <a href="#" class="btn-primary">VIEW MORE</a>
+        </div>
+    </section>
+
+    <!-- Luxury Collection -->
+    <section class="luxury-section" id="luxury">
+        <h2 class="luxury-title">Luxury <span class="accent">Collection</span></h2>
+        <a href="#" class="btn-primary">VIEW ALL PROPERTIES</a>
+    </section>
+
+    <!-- Communities Section -->
+    <section class="communities-section" id="communities">
+        <div class="communities-container">
+            <div class="communities-content">
+                <h2>Explore Real Estate<br><span class="accent">Communities</span></h2>
+                <p class="communities-text">
+                    Discover Calgary's most desirable Southeast communities with local experts. From the waterfront 
+                    lifestyle of Mahogany to the urban amenities of Seton and the lakeside living in Chestermere, 
+                    Duiker Properties specializes in the unique markets that make Southeast Calgary exceptional. 
+                    We combine local expertise with personalized service to guide you through each distinct community.
+                </p>
+                <a href="#" class="btn-primary">VIEW MORE</a>
+            </div>
+            <div class="communities-grid">
+                <div class="community-card">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600" alt="Mahogany">
+                    <div class="community-overlay">
+                        <h3 class="community-name">Mahogany</h3>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600" alt="Seton">
+                    <div class="community-overlay">
+                        <h3 class="community-name">Seton</h3>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <img src="https://images.unsplash.com/photo-1464146072230-91cabc968266?w=600" alt="Chestermere">
+                    <div class="community-overlay">
+                        <h3 class="community-name">Chestermere</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Types -->
+    <section class="property-types">
+        <div class="type-card">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" alt="Residential">
+            <div class="type-overlay">
+                <h3 class="type-name">Residential</h3>
+            </div>
+        </div>
+        <div class="type-card">
+            <img src="https://images.unsplash.com/photo-1587473454-df06a8e8a38f?w=600" alt="Lakefront">
+            <div class="type-overlay">
+                <h3 class="type-name">Lakefront</h3>
+            </div>
+        </div>
+        <div class="type-card">
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600" alt="New Developments">
+            <div class="type-overlay">
+                <h3 class="type-name">New Developments</h3>
+            </div>
+        </div>
+        <div class="type-card">
+            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600" alt="Investment">
+            <div class="type-overlay">
+                <h3 class="type-name">Investment</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="section-header">
+            <h2>Latest Real Estate <span class="accent">News</span></h2>
+        </div>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600" alt="News">
+                </div>
+                <div class="news-content">
+                    <h3 class="news-title">Calgary Market Update: What Buyers Need to Know</h3>
+                    <p class="news-date">January 8, 2026</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=600" alt="News">
+                </div>
+                <div class="news-content">
+                    <h3 class="news-title">Top 5 Southeast Calgary Communities for Families</h3>
+                    <p class="news-date">January 5, 2026</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600" alt="News">
+                </div>
+                <div class="news-content">
+                    <h3 class="news-title">2026: Why Now is the Time to Invest in Calgary Real Estate</h3>
+                    <p class="news-date">January 1, 2026</p>
+                </div>
+            </div>
+        </div>
+        <div class="view-more-btn">
+            <a href="#" class="btn-primary">VIEW ALL PRESS</a>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta" id="contact">
+        <h2 class="contact-title">Let's Get <span class="accent">Connected</span></h2>
+        <p class="contact-text">
+            Bringing together expertise, dedication, and cutting-edge technology to help you 
+            reach your buying and selling goals in Southeast Calgary.
+        </p>
+        <a href="#" class="btn-primary">CONTACT US</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>DUIKER<br>PROPERTIES</h3>
+                <p style="color: #ccc; line-height: 1.8;">
+                    Royal LePage Solutions<br>
+                    Calgary, Alberta<br>
+                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543f2d38311430213d3f312624263b243126203d31277a373b39">[email&#160;protected]</a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#buy">Buy</a></li>
+                    <li><a href="#sell">Sell</a></li>
+                    <li><a href="#communities">Communities</a></li>
+                    <li><a href="#search">Home Search</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Communities</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Mahogany</a></li>
+                    <li><a href="#">Seton</a></li>
+                    <li><a href="#">Auburn Bay</a></li>
+                    <li><a href="#">Cranston</a></li>
+                    <li><a href="#">Chestermere</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Market Reports</a></li>
+                    <li><a href="#">Buyer Guide</a></li>
+                    <li><a href="#">Seller Guide</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Duiker Properties. All rights reserved. | Royal LePage Solutions</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Hamburger menu (basic toggle for mobile)
+        const hamburger = document.querySelector('.hamburger');
+        hamburger.addEventListener('click', () => {
+            alert('Mobile menu would open here - implement as needed');
+        });
+
+        // Search functionality
+        const searchBarButton = document.getElementById('searchBarButton');
+
+        searchBarButton.addEventListener('click', () => {
+            // Redirect to your property search page
+            window.location.href = 'https://www.duikerproperties.com/index.php?advanced=1&display=Calgary&areas%5B%5D=city%3Acalgary%3Aab&custombox=&types%5B%5D=1&types%5B%5D=2&types%5B%5D=3&types%5B%5D=4&types%5B%5D=5&types%5B%5D=6&types%5B%5D=8&types%5B%5D=11&types%5B%5D=12&types%5B%5D=20&types%5B%5D=31&beds=0&baths=0&min=0&max=100000000&rtype=map#rslt';
+            
+            // Option 2: Open in new tab (uncomment if you prefer this)
+            // window.open('https://www.duikerproperties.com/index.php?advanced=1&display=Calgary&areas%5B%5D=city%3Acalgary%3Aab&custombox=&types%5B%5D=1&types%5B%5D=2&types%5B%5D=3&types%5B%5D=4&types%5B%5D=5&types%5B%5D=6&types%5B%5D=8&types%5B%5D=11&types%5B%5D=12&types%5B%5D=20&types%5B%5D=31&beds=0&baths=0&min=0&max=100000000&rtype=map#rslt', '_blank');
+        });
+    </script>
 </body>
 </html>
